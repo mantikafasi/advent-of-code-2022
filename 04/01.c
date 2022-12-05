@@ -36,7 +36,7 @@ int main()
     file = fopen("4.txt", "r");
     int firstResult = 0;
     int secondResult = 0;
-
+    
     while (fgets(buffer, 20, file))
     {
         char** tokens;
