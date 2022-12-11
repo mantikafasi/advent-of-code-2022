@@ -26,7 +26,7 @@ with open("11.txt","r") as f:
     monke["inspectCount"] = 0
     monkeys.append(monke)
 
-    for round in range(20):
+    for round in range(10000):
         for monkey in monkeys:
             operation = monkey["operation"]
             for item in monkey["starting"]:
@@ -34,10 +34,11 @@ with open("11.txt","r") as f:
 
                 guh = (operation.replace("old",item).strip())
                 
-                newItem = int(eval(guh) / 3)
+                #newItem = int(eval(guh) / 3)
 
+                newItem = int(eval(guh) % (2*3*5*7*11*13*17*19)) 
 
-                if newItem % monkey["test"] == 0:
+                if newItem % monkey["test"]== 0:
                     monkeys[int(monkey["true"])]["starting"].append(str(newItem))
                 else:
                     monkeys[int(monkey["false"])]["starting"].append(str(newItem))
