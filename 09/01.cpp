@@ -5,46 +5,50 @@
 
 using namespace std;
 
-
-
-int main () {
-
-  int visitedPlaces[200000][2]; // FOR SOME REASON DELETING THIS PRODUCES WRONG RESULT I DONT EVEN USE THIS
-
+int main()
+{
   string line;
-
-  ofstream outFile;
   ifstream myfile;
 
-  int tailCoords[2];
-  int headCoords[2];
+  int tailCoords[2] = {0, 0};
+  int headCoords[2] = {0, 0};
   set<string> visitedPlacesStr;
 
-  myfile.open ("9.txt");
-  while( getline (myfile,line) )
+  myfile.open("9.txt");
+  while (getline(myfile, line))
   {
     char pos = line[0];
-    int count = stoi(line.substr(2,2));
-    
-    for (int i = 0;i < count;i++) {
-      if (pos == 'U') {
+    int count = stoi(line.substr(2));
+
+    for (int i = 0; i < count; i++)
+    {
+      if (pos == 'U')
+      {
         headCoords[1] += 1;
-      } else if (pos == 'D') {
+      }
+      else if (pos == 'D')
+      {
         headCoords[1] -= 1;
-      } else if (pos == 'R') {
+      }
+      else if (pos == 'R')
+      {
         headCoords[0] += 1;
-      } else if (pos == 'L') {
+      }
+      else if (pos == 'L')
+      {
         headCoords[0] -= 1;
       }
 
       int xdistance = headCoords[0] - tailCoords[0];
       int ydistance = headCoords[1] - tailCoords[1];
 
-      if (xdistance > 1 || xdistance < -1) {
+      if (xdistance > 1 || xdistance < -1)
+      {
         tailCoords[0] += (xdistance / 2);
         tailCoords[1] += (ydistance);
       }
-      else if (ydistance > 1 || ydistance < -1) {
+      else if (ydistance > 1 || ydistance < -1)
+      {
         tailCoords[1] += (ydistance / 2);
         tailCoords[0] += (xdistance);
       }
@@ -52,7 +56,6 @@ int main () {
       visitedPlacesStr.insert(to_string(tailCoords[0]) + "," + to_string(tailCoords[1]));
     }
   }
-
 
   cout << visitedPlacesStr.size() << '\n';
   myfile.close();
